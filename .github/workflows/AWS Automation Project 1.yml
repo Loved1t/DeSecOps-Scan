@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-
-=======
 name: AWS Automation Project 1
 
 on:
@@ -15,17 +12,17 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       # Terraform setup
       - name: Set up Terraform
-        uses: hashicorp/setup-terraform@v1
+        uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: 1.0.0
 
       # AWS credentials setup
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v2
+        uses: aws-actions/configure-aws-credentials@v3
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -38,4 +35,3 @@ jobs:
       # Deploy Terraform
       - name: Deploy Terraform
         run: terraform apply -auto-approve
->>>>>>> 9b07c6692cc8aa946f84a65352e6f72a216ef276
