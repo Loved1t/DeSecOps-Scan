@@ -23,10 +23,8 @@ jobs:
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
         with:
-          languages: python  # change if you're using a different language
+          languages: python  # Change this if your project uses a different language
 
       - name: Perform CodeQL analysis
         uses: github/codeql-action/analyze@v3
-- uses: github/codeql-action/analyze@v3
-
         
