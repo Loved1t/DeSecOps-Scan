@@ -27,27 +27,16 @@ jobs:
         run: docker pull michaelny/loved1t:latest
 
       - name: Install Trivy
-        run:
-          curl -sfL https://aquasecurity.github.io/trivy-repo/deb/public.key | sudo apt-key add -
-          echo "deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main" | sudo tee -a /etc/apt/sources.list.d/trivy.list
-          sudo apt-get update && sudo apt-get install -yq trivy
+        run: |
+          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh
+          sudo mv trivy /usr/local/bin/
 
-  build:
-    name: Image Scan
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-
-    - name: Run Trivy vulnerability scanner in fs mode
-      uses: aquasecurity/trivy-action@master
-      with:
-        scan-type: 'image'
-        scanners: 'vuln'
-        image-ref: michaelny/loved1t:latest
-        scan-ref: '.'
-        hide-progress: false
-        format: 'table'
-        ignore-unfixed: true
-        - name: Install Trivy
- 
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'image'
+          scanners: 'vuln'
+          image-ref: 'michaelny/loved1t:latest'
+          format: 'table'
+          ignore-unfixed: true
+          hide-progress: false
