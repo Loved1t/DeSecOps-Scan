@@ -25,11 +25,11 @@ jobs:
 
       - name: Pull Docker Image
         run: docker pull michaelny/loved1t:latest
-
-      - name: Install Trivy
-        run: |
-          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh
-          sudo mv trivy /usr/local/bin/
+        
+- name: Install Trivy
+  run: |
+    curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh
+    sudo mv ./bin/trivy /usr/local/bin/trivy
 
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
